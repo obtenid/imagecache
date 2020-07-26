@@ -9,6 +9,7 @@ Laravel 4/5 package that allows you to create image thumbnails according to pred
 ## Installation
 
 Using Composer, edit your `composer.json` file to require `devfactory/imagecache`.
+##### Laravel 7 add support
 
 ##### Laravel 5
 
