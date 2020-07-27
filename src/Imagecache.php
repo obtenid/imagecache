@@ -462,6 +462,7 @@ class Imagecache {
     {
       $image->resizeCanvas($this->preset->width, $this->preset->height, 'center', FALSE, $this->preset->background_color);
     }
+    $this->insert($image);
     
     return $image;
   }
@@ -483,10 +484,22 @@ class Imagecache {
     else {
       $image->fit($this->preset->width, $this->preset->height);
     }
-
+    $this->insert($image);
+    
     return $image;
   }
 
+  protected function insert($image) {
+    if (isset($this->preset->insert)) {
+      $source = $this->preset->insert['source'];
+      $position = !empty($this->preset->insert['position']) ? $this->preset->insert['position'] : null;
+      $x = !empty($this->preset->insert['x']) ? $this->preset->insert['x'] : null;
+      $y = !empty($this->preset->insert['y']) ? $this->preset->insert['y'] : null;
+      $image->insert($source, $position, $x, $y);
+    }
+    
+    return $image;
+  }
   /**
    * Create the path of the imagecache for the given image and preset
    *

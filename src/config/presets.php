@@ -27,5 +27,16 @@ return array(
     'height' => 80,
     'method' => 'crop',
   ),
+  'w800' => array(
+      'width' => 800,
+      'height' => null,
+      'method' => 'resize',
+      'insert' => array(
+          'source' => 'public_path("images/watermark/w400.png")',
+          'position' => 'center',
+          'x' => null,
+          'y' => null,
+      )
+  )
 
 );
