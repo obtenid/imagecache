@@ -269,6 +269,15 @@ class Imagecache {
     return FALSE;
   }
 
+  function replaceExtension($file_name) {
+    if (!empty($this->format)) {
+      $info = pathinfo($file_name);
+      return $info['filename'] . '.' . $this->format;
+    }
+
+    return $file_name;
+  }
+
   /**
    * Parse the passed arguments and set the instance variables
    *
@@ -282,7 +291,7 @@ class Imagecache {
     $this->class = (isset($args['class']) ? $args['class'] : NULL);
     $this->alt = isset($args['alt']) ? $args['alt'] : $this->parseAlt();
     $this->title = isset($args['title']) ? $args['title'] : $this->parseTitle();
-    $this->type = isset($args['format']) ? $args['format'] : null;
+    $this->format = isset($args['format']) ? $args['format'] : null;
   }
 
   /**
@@ -424,7 +433,7 @@ class Imagecache {
       return FALSE;
     }
     if (isset($this->format)) {
-      if ($image->save($cached_image, $this->quality, $this->format)) {
+      if ($image->encode($this->format, 75)->save($cached_image, $this->quality, $this->format)) {
         return TRUE;
       }
     } else {
@@ -513,7 +522,9 @@ class Imagecache {
    * @return string
    */
   protected function get_cached_image_path() {
-    return $this->imagecache_uri . $this->preset->name .'/'. $this->file_name;
+    $fileName = $this->replaceExtension($this->file_name);
+    
+    return $this->imagecache_uri . $this->preset->name .'/'. $fileName;
   }
 
   /**
