@@ -90,6 +90,7 @@ class Imagecache {
    * @var string
    */
   protected $title;
+  protected $format;
 
   /**
    * The quality for the generated image
@@ -281,6 +282,7 @@ class Imagecache {
     $this->class = (isset($args['class']) ? $args['class'] : NULL);
     $this->alt = isset($args['alt']) ? $args['alt'] : $this->parseAlt();
     $this->title = isset($args['title']) ? $args['title'] : $this->parseTitle();
+    $this->type = isset($args['format']) ? $args['format'] : null;
   }
 
   /**
@@ -421,9 +423,14 @@ class Imagecache {
     if (!($image = $this->buildImage())) {
       return FALSE;
     }
-
-    if ($image->save($cached_image, $this->quality)) {
-      return TRUE;
+    if (isset($this->format)) {
+      if ($image->save($cached_image, $this->quality, $this->format)) {
+        return TRUE;
+      }
+    } else {
+      if ($image->save($cached_image, $this->quality)) {
+        return TRUE;
+      }
     }
 
     return FALSE;
