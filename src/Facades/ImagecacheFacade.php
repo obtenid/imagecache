@@ -1,4 +1,4 @@
-<?php namespace Devfactory\Imagecache\Facades;
+<?php namespace Obtenid\Imagecache\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

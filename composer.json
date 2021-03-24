@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Devfactory\\Imagecache\\": "src/"
+      "Obtenid\\Imagecache\\": "src/"
     }
   },
   "minimum-stability": "stable"

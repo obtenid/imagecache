@@ -1,4 +1,4 @@
-<?php namespace Devfactory\Imagecache;
+<?php namespace Obtenid\Imagecache;
 
 use Illuminate\Support\ServiceProvider;
 
